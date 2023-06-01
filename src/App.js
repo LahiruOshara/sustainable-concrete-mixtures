@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import { ThemeProvider } from '@mui/material/styles';
+import MixtureForm from './components/MixtureForm';
+import { createTheme } from '@mui/material/styles';
+
 
 function App() {
+
+  const defaultTheme = createTheme();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={defaultTheme}>
+      <CssBaseline />
+      <AppBar
+        position="absolute"
+        color="default"
+        elevation={0}
+        sx={{
+          position: 'relative',
+          borderBottom: (t) => `1px solid ${t.palette.divider}`,
+        }}
+      >
+        <Toolbar>
+          <Typography variant="h6" color="inherit" noWrap>
+            Susntainable Bla bla
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <MixtureForm />
+    </ThemeProvider>
   );
 }
 
