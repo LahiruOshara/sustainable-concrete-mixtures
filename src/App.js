@@ -11,6 +11,7 @@ import { createTheme } from '@mui/material/styles';
 function App() {
 
   const defaultTheme = createTheme();
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -30,7 +31,9 @@ function App() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <MixtureForm />
+      {isSubmitted ? <div>Thank you for your submission</div> :
+        <MixtureForm setSubmitted={setIsSubmitted} />
+      }
     </ThemeProvider>
   );
 }

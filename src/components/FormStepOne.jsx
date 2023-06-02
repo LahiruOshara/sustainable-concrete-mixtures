@@ -1,10 +1,10 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import * as React from "react";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import {
   inlandSelection,
   marineSelection,
@@ -13,19 +13,32 @@ import {
   KURUNAGALA,
   INLAND,
   MARINE,
-} from '../constants/GeneralConstants';
+} from "../constants/GeneralConstants";
 
-export default function FormStepOne({ onStructureTypeChange, onAreaChange }) {
-  const [structureType, setStructureType] = React.useState('');
-  const [isStructureSelected, setIsStructureSelected] = React.useState(false);
-  const [area, setArea] = React.useState('');
-  const [areaList, setAreaList] = React.useState([]);
+import { getValueByKey, getKeyByValue } from "../generalUtils/GeneralUtilities";
+
+export default function FormStepOne({
+  structureType: initialStructureType,
+  area: initialArea,
+  areaList: initialAreaList,
+  setAreaList,
+  onStructureTypeChange,
+  onAreaChange,
+}) {
+
+  const [structureType, setStructureType] =
+    React.useState(getKeyByValue(initialStructureType, structureTypes));
+  const [isStructureSelected, setIsStructureSelected] = React.useState(
+    Boolean(initialStructureType)
+  );
+
+  const [area, setArea] = React.useState(getKeyByValue(initialArea, initialAreaList));
 
   const handleStructureTypeChange = (event) => {
     const structureType = event.target.value;
     setStructureType(structureType);
     setIsStructureSelected(true);
-    setArea(''); // Reset the selected area value
+    setArea(""); // Reset the selected area value
 
     if (structureType === INLAND) {
       setAreaList(inlandSelection);
@@ -48,12 +61,7 @@ export default function FormStepOne({ onStructureTypeChange, onAreaChange }) {
     }
 
     // Pass the selected area to the parent component
-    onAreaChange(getValueByKey(area, areaList));
-  };
-
-  const getValueByKey = (key, arr) => {
-    const value = arr.find((item) => item.key === key);
-    return value ? value.value : '';
+    onAreaChange(getValueByKey(area, initialAreaList));
   };
 
   return (
@@ -65,7 +73,9 @@ export default function FormStepOne({ onStructureTypeChange, onAreaChange }) {
       <Grid container spacing={3}>
         <Grid item xs={6}>
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Structure Type</InputLabel>
+            <InputLabel id="demo-simple-select-label">
+              Structure Type
+            </InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -95,7 +105,7 @@ export default function FormStepOne({ onStructureTypeChange, onAreaChange }) {
                 onChange={handleAreaChange}
                 placeholder="Area"
               >
-                {areaList.map((item) => (
+                {initialAreaList.map((item) => (
                   <MenuItem key={item.key} value={item.key}>
                     {item.value}
                   </MenuItem>
