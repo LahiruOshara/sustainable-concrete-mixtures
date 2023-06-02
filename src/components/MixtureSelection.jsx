@@ -8,12 +8,12 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FormStepOne from "./FormStepOne";
-import PaymentForm from "./PaymentForm";
+import FormStepTwo from "./FormStepTwo";
 import SummaryView from "./SummaryView";
 
 const steps = ["Inland/ Marine", "Choose 2", "Summary"];
 
-export default function MixtureForm({ setSubmitted }) {
+export default function MixtureSelection({ setSubmitted }) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [structureType, setStructureType] = React.useState("");
   const [area, setArea] = React.useState("");
@@ -57,7 +57,7 @@ export default function MixtureForm({ setSubmitted }) {
           />
         );
       case 1:
-        return <PaymentForm />;
+        return <FormStepTwo />;
       case 2:
         return <SummaryView structureType={structureType} area={area} />;
       default:
