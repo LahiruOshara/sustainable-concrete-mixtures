@@ -3,10 +3,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { ThemeProvider } from '@mui/material/styles';
-import MixtureSelection from './components/MixtureSelection';
-import { createTheme } from '@mui/material/styles';
-
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import MixtureSelection from './components/FormComponents/MixtureSelection';
+import TransitionAlerts from './components/Alerts/TransitionAlerts';
 
 function App() {
 
@@ -31,7 +30,9 @@ function App() {
           </Typography>
         </Toolbar>
       </AppBar>
-      {isSubmitted ? <div>Thank you for your submission</div> :
+      {isSubmitted ?
+        <TransitionAlerts />
+        :
         <MixtureSelection setSubmitted={setIsSubmitted} />
       }
     </ThemeProvider>

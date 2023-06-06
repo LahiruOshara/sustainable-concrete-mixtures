@@ -13,9 +13,9 @@ import {
   KURUNAGALA,
   INLAND,
   MARINE,
-} from "../constants/GeneralConstants";
+} from "../../constants/GeneralConstants";
 
-import { getValueByKey, getKeyByValue } from "../generalUtils/GeneralUtilities";
+import { getValueByKey, getKeyByValue } from "../../generalUtils/GeneralUtilities";
 
 export default function FormStepOne({
   structureType: initialStructureType,
