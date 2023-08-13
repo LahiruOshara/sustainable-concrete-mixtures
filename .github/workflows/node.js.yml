@@ -1,0 +1,19 @@
+name: Analyze pull request
+on:
+  # Trigger analysis when open edit, synchronize or re-opene a pull request.
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ vars.NODE_VERSION }}
+      - name: Install npm #We run this to identify vulnerabilities not caught under yarn install
+        run: npm install
