@@ -9,15 +9,32 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FormStepOne from "./FormStepOne";
 import FormStepTwo from "./FormStepTwo";
+import FormStepThree from "./FormStepThree";
+import FormStepFour from "./FormStepFour";
 import SummaryView from "./SummaryView";
 
-const steps = ["Inland/ Marine", "Choose 2", "Summary"];
+const steps = [
+  "Structure Details",
+  "Degradation Processes",
+  "Specifications",
+  "Summary",
+];
 
 export default function MixtureSelection({ setSubmitted }) {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [structureType, setStructureType] = React.useState("");
-  const [area, setArea] = React.useState("");
+  const [structureType, setStructureType] = React.useState({
+    key: "",
+    value: "",
+  });
+  const [area, setArea] = React.useState({ key: "", value: "" });
   const [areaList, setAreaList] = React.useState([]);
+
+  const [carbonationClass, setCarbonationClass] = React.useState();
+  const [corrosion, setCorrosion] = React.useState();
+  const [chemicalAttack, setChemicalAttack] = React.useState();
+
+  const [designLife, setDesignLife] = React.useState();
+  const [strengthClass, setStrengthClass] = React.useState();
 
   const isNextButtonDisabled = activeStep === 0 && area === "";
 
@@ -50,6 +67,7 @@ export default function MixtureSelection({ setSubmitted }) {
           <FormStepOne
             structureType={structureType}
             area={area}
+            setArea={handleAreaChange}
             areaList={areaList}
             setAreaList={setAreaList}
             onStructureTypeChange={handleStructureTypeChange}
@@ -57,8 +75,41 @@ export default function MixtureSelection({ setSubmitted }) {
           />
         );
       case 1:
-        return <FormStepTwo />;
+        return (
+          <FormStepTwo
+            structureType={structureType}
+            area={area}
+            carbonationClass={carbonationClass}
+            corrosion={corrosion}
+            chemicalAttack={chemicalAttack}
+            setCarbonationClass={setCarbonationClass}
+            setChemicalAttack={setChemicalAttack}
+            setCorrosion={setCorrosion}
+          />
+        );
       case 2:
+        return (
+          <FormStepThree
+            area={area}
+            designLife={designLife}
+            strengthClass={strengthClass}
+            setDesignLife={setDesignLife}
+            setStrengthClass={setStrengthClass}
+          />
+        );
+      case 3:
+        return (
+          <FormStepFour
+            selectedStructureType={structureType}
+            selectedArea={area}
+            selectedCarbonationClass={carbonationClass}
+            selectedCorrosion={corrosion}
+            selectedChemicalAttack={chemicalAttack}
+            selectedDesignLife={designLife}
+            selectedStrengthClass={strengthClass}
+          />
+        );
+      case 4:
         return <SummaryView structureType={structureType} area={area} />;
       default:
         throw new Error("Unknown step");

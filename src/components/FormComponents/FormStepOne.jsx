@@ -79,7 +79,7 @@ export default function FormStepOne({
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={structureType}
+              value={structureType || ""}
               label="Structure Type"
               onChange={handleStructureTypeChange}
               placeholder="Structure Type"
@@ -100,7 +100,7 @@ export default function FormStepOne({
               <Select
                 labelId="demo-simple-select-label-1"
                 id="demo-simple-select-1"
-                value={area}
+                value={area || ""}
                 label="Area"
                 onChange={handleAreaChange}
                 placeholder="Area"
