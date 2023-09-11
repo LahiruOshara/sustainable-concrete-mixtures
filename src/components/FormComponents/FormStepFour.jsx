@@ -16,13 +16,13 @@ export default function FormStepFour({
         Selected Properties Summary
       </Typography>
 
-      <Typography variant="body1" style={{ fontWeight: "bold" }}>
+      {/* <Typography variant="body1" style={{ fontWeight: "bold" }}>
         Considering the information given to the system, following are the
         combinations of exposure conditions and the minimum requirements
         according to EN206
         <br />
         <br />
-      </Typography>
+      </Typography> */}
 
       <Typography variant="body1">
         Structure Type: {selectedStructureType}
@@ -42,8 +42,8 @@ export default function FormStepFour({
         Selected Strength Class: {selectedStrengthClass}
       </Typography>
 
-      {selectedStructureType === "Inland Structure" &&
-      selectedArea === "Kurunagala Area" ? (
+      {/* {selectedStructureType === "Inland Structure" &&
+      selectedArea === "Kurunegala Area" ? (
         <Typography variant="body1">
           Max w/c ratio- 0.6 <br /> Min strength class- 25/30 <br /> Min cement
           content- 280
@@ -64,7 +64,7 @@ export default function FormStepFour({
           Max w/c ratio- 0.45 <br /> Min strength class- 35/45 <br /> Min cement
           content- 320
         </Typography>
-      ) : null}
+      ) : null} */}
     </React.Fragment>
   );
 }

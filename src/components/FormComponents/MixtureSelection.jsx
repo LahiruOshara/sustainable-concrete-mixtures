@@ -11,6 +11,9 @@ import FormStepOne from "./FormStepOne";
 import FormStepTwo from "./FormStepTwo";
 import FormStepThree from "./FormStepThree";
 import FormStepFour from "./FormStepFour";
+import FormStepFive from "./FormStepFive";
+import FormStepSix from "./FormStepSix";
+import FormStepSeven from "./FormStepSeven";
 import SummaryView from "./SummaryView";
 
 const steps = [
@@ -18,6 +21,10 @@ const steps = [
   "Degradation Processes",
   "Specifications",
   "Summary",
+  "Durability Properties",
+  "Sustainability Scores",
+  "Sustainability Scores",
+  "Concrete Mix Design",
 ];
 
 export default function MixtureSelection({ setSubmitted }) {
@@ -35,6 +42,11 @@ export default function MixtureSelection({ setSubmitted }) {
 
   const [designLife, setDesignLife] = React.useState();
   const [strengthClass, setStrengthClass] = React.useState();
+
+  const [surfaceResistivity, setSurfaceResistivity] = React.useState();
+  const [waterPermeability, setWaterPermeability] = React.useState();
+
+  const [sustainabilityScore, setSustainabilityScore] = React.useState();
 
   const isNextButtonDisabled = activeStep === 0 && area === "";
 
@@ -110,20 +122,68 @@ export default function MixtureSelection({ setSubmitted }) {
           />
         );
       case 4:
-        return <SummaryView structureType={structureType} area={area} />;
+        return (
+          <FormStepFive
+            surfaceResistivity={surfaceResistivity}
+            setSurfaceResistivity={setSurfaceResistivity}
+            waterPermeability={waterPermeability}
+            setWaterPermeability={setWaterPermeability}
+            strengthClass={strengthClass}
+          />
+        );
+      case 5:
+        return (
+          <FormStepSix
+            surfaceResistivity={surfaceResistivity}
+            setSurfaceResistivity={setSurfaceResistivity}
+            waterPermeability={waterPermeability}
+            setWaterPermeability={setWaterPermeability}
+            strengthClass={strengthClass}
+            sustainabilityScore={sustainabilityScore}
+            setSustainabilityScore={setSustainabilityScore}
+          />
+        );
+      case 6:
+        return (
+          <FormStepSeven
+            surfaceResistivity={surfaceResistivity}
+            setSurfaceResistivity={setSurfaceResistivity}
+            waterPermeability={waterPermeability}
+            setWaterPermeability={setWaterPermeability}
+            strengthClass={strengthClass}
+            sustainabilityScore={sustainabilityScore}
+            setSustainabilityScore={setSustainabilityScore}
+          />
+        );
+      case 7:
+        return (
+          <SummaryView
+            selectedStructureType={structureType}
+            selectedArea={area}
+            selectedCarbonationClass={carbonationClass}
+            selectedCorrosion={corrosion}
+            selectedChemicalAttack={chemicalAttack}
+            selectedDesignLife={designLife}
+            selectedStrengthClass={strengthClass}
+          />
+        );
       default:
         throw new Error("Unknown step");
     }
   };
 
   return (
-    <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
+    <Container
+      component="main"
+      maxWidth={false}
+      sx={{ mb: 4, width: "80%", height: "80vh" }}
+    >
       <Paper
         variant="outlined"
         sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
       >
         <Typography component="h1" variant="h4" align="center">
-          Sustainable Cement
+          Concrete Mix Design
         </Typography>
         <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
           {steps.map((label) => (
@@ -140,14 +200,16 @@ export default function MixtureSelection({ setSubmitted }) {
                 Back
               </Button>
             )}
-            <Button
-              variant="contained"
-              onClick={handleNext}
-              disabled={isNextButtonDisabled}
-              sx={{ mt: 3, ml: 1 }}
-            >
-              {activeStep === steps.length - 1 ? "Submit" : "Next"}
-            </Button>
+            {activeStep === steps.length - 1 ? null : (
+              <Button
+                variant="contained"
+                onClick={handleNext}
+                disabled={isNextButtonDisabled}
+                sx={{ mt: 3, ml: 1 }}
+              >
+                Next
+              </Button>
+            )}
           </Box>
         </React.Fragment>
       </Paper>

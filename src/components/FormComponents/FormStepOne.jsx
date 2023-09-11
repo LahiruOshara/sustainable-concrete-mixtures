@@ -10,7 +10,7 @@ import {
   marineSelection,
   structureTypes,
   COLOMBO,
-  KURUNAGALA,
+  KURUNEGALA,
   INLAND,
   MARINE,
 } from "../../constants/GeneralConstants";
@@ -54,8 +54,8 @@ export default function FormStepOne({
     const area = event.target.value;
     setArea(area);
 
-    if (area === KURUNAGALA) {
-      console.log(KURUNAGALA);
+    if (area === KURUNEGALA) {
+      console.log(KURUNEGALA);
     } else if (area === COLOMBO) {
       console.log(COLOMBO);
     }

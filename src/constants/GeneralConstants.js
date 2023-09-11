@@ -1,6 +1,6 @@
 export const inlandSelection = [
     { key: 'COLOMBO', value: 'Colombo Area' },
-    { key: 'KURUNAGALA', value: 'Kurunagala Area' },
+    { key: 'KURUNEGALA', value: 'Kurunegala Area' },
 ];
 
 export const marineSelection = [
@@ -12,7 +12,7 @@ export const structureTypes = [
     { key: 'MARINE', value: 'Marine Structure' },
 ];
 
-export const KURUNAGALA = "KURUNAGALA";
+export const KURUNEGALA = "KURUNEGALA";
 export const COLOMBO = "COLOMBO";
 export const INLAND = "INLAND";
 export const MARINE = "MARINE";
@@ -47,4 +47,34 @@ export const strengthGradeListKurunegala = [
 export const strengthGradeListColombo = [
     { key: 'C35/45', value: 'C35/45' },
     { key: 'C45/55', value: 'C45/55' }
+];
+
+export const surfaceResistivityList = [
+    { key: 'Poor', value: 'Poor' },
+    { key: 'Normal', value: 'Normal' },
+];
+
+export const waterPermeabilityList  = [
+    { key: '< 50mm', value: '< 50mm' },
+    { key: '> 50mm', value: '> 50mm' },
+];
+
+export const sustainabilityScoresList = [
+    { key: 'W1', value: 'W1' },
+    { key: 'W2', value: 'W2' },
+    { key: 'W3', value: 'W3' },
+    { key: 'W4', value: 'W4' },
+    { key: 'W5', value: 'W5' },
+];
+
+export const mixBatchSelectionList = [
+    { key: 'M5, B1', value: 'M5, B1' },
+    { key: 'M5, B2', value: 'M5, B2' },
+    { key: 'M5, B3', value: 'M5, B3' },
+    { key: 'M6, B1', value: 'M6, B1' },
+    { key: 'M6, B2', value: 'M6, B2' },
+    { key: 'M6, B3', value: 'M6, B3' },
+    { key: 'M7, B1', value: 'M7, B1' },
+    { key: 'M7, B2', value: 'M7, B2' },
+    { key: 'M7, B3', value: 'M7, B3' },
 ];
