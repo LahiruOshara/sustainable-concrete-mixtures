@@ -26,7 +26,7 @@ function App() {
       >
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Sustainable Cement
+            Concrete Mix Design
           </Typography>
         </Toolbar>
       </AppBar>
