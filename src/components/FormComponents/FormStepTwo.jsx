@@ -47,7 +47,7 @@ export default function FormStepTwo({
         <Grid item xs={6}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">
-            Corrosion induced by carbonation
+              Corrosion induced by carbonation
             </InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -71,7 +71,9 @@ export default function FormStepTwo({
         <Grid container spacing={3} style={{ marginTop: "10px" }}>
           <Grid item xs={6}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Corrosion</InputLabel>
+              <InputLabel id="demo-simple-select-label">
+                Corrosion induced by Chlorides from Sea Water
+              </InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -100,7 +102,7 @@ export default function FormStepTwo({
           <Grid item xs={6}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">
-                Chemical Attack
+                Corrosion induced by Chemical Attack
               </InputLabel>
               <Select
                 labelId="demo-simple-select-label"

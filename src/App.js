@@ -26,7 +26,7 @@ function App() {
       >
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Susntainable Bla bla
+            Sustainable Cement
           </Typography>
         </Toolbar>
       </AppBar>
