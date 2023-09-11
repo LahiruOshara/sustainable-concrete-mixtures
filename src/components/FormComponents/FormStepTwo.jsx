@@ -67,7 +67,7 @@ export default function FormStepTwo({
         </Grid>
       </Grid>
 
-      {structureType === "Inland Structure" ? (
+      {structureType === "Inland Structure" ? null : (
         <Grid container spacing={3} style={{ marginTop: "10px" }}>
           <Grid item xs={6}>
             <FormControl fullWidth>
@@ -95,7 +95,7 @@ export default function FormStepTwo({
             </FormControl>
           </Grid>
         </Grid>
-      ) : null}
+      )}
 
       {structureType === "Inland Structure" && area === "Colombo Area" ? (
         <Grid container spacing={3} style={{ marginTop: "10px" }}>

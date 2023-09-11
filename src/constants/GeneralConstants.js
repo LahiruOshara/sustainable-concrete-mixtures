@@ -34,9 +34,9 @@ export const chemicalAttackInlandList = [
 ]
 
 export const designLifeList = [
-    { key: '25', value: '25' },
-    { key: '50', value: '50' },
-    { key: '100', value: '100' }
+    { key: '25', value: '25', disabled: true},
+    { key: '50', value: '50', disabled: false },
+    { key: '100', value: '100', disabled: true }
 ]
 
 export const strengthGradeListKurunegala = [

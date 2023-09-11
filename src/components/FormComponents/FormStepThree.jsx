@@ -6,7 +6,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import {
-  COLOMBO,
   designLifeList,
   strengthGradeListKurunegala,
   strengthGradeListColombo,
@@ -22,7 +21,8 @@ export default function FormStepTwo({
   const [strengthClassList, setStrengthClassList] = React.useState([]);
 
   React.useEffect(() => {
-    if (area === COLOMBO) {
+    console.log("area", area);
+    if (area === 'Colombo Area') {
       setStrengthClassList(strengthGradeListColombo);
     } else {
       setStrengthClassList(strengthGradeListKurunegala);
@@ -57,7 +57,11 @@ export default function FormStepTwo({
               placeholder="Design life"
             >
               {designLifeList.map((item) => (
-                <MenuItem key={item.key} value={item.key}>
+                <MenuItem
+                  key={item.key}
+                  value={item.key}
+                  disabled={item.disabled}
+                >
                   {item.value}
                 </MenuItem>
               ))}
