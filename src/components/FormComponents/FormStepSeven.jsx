@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
@@ -14,19 +14,15 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import {
-  mixBatchSelectionList,
-  waterPermeabilityList,
-} from "../../constants/GeneralConstants";
+import { mixBatchSelectionList } from "../../constants/GeneralConstants";
 
 export default function FormStepSeven({
-  strengthClass,
-  waterPermeability,
-  setWaterPermeability,
+  tableValues,
+  mixBatchTable,
   sustainabilityScore,
   setSustainabilityScore,
 }) {
-  const handleDesignLifeChange = (event) => {
+  const handleSelectMixDesign = (event) => {
     setSustainabilityScore(event.target.value);
   };
 
@@ -37,7 +33,7 @@ export default function FormStepSeven({
       </Typography>
 
       <Typography variant="body1">
-        According to the selected requirements, 3 mixes out of the 11 available
+        According to the selected requirements, { tableValues.length } mixes out of the 11 available
         mixes qualify.
         <br />
         Below are the overall sustainability scores for the qualifying mixes
@@ -61,7 +57,7 @@ export default function FormStepSeven({
 
       <TableContainer component={Paper} size="small">
         <Table aria-label="simple table">
-          <TableHead>
+        <TableHead>
             <TableRow>
               <TableCell style={{ fontWeight: "bold" }}></TableCell>
               <TableCell style={{ fontWeight: "bold" }}>B1</TableCell>
@@ -70,44 +66,15 @@ export default function FormStepSeven({
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell
-                component="th"
-                scope="row"
-                style={{ fontWeight: "bold" }}
-              >
-                M5
-              </TableCell>
-              <TableCell>0.926</TableCell>
-              <TableCell>0.914</TableCell>
-              <TableCell>0.987</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell
-                component="th"
-                scope="row"
-                style={{ fontWeight: "bold" }}
-              >
-                M6
-              </TableCell>
-
-              <TableCell>0.783</TableCell>
-              <TableCell>0.772</TableCell>
-              <TableCell>0.842</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell
-                component="th"
-                scope="row"
-                style={{ fontWeight: "bold" }}
-              >
-                M7
-              </TableCell>
-
-              <TableCell>0.857</TableCell>
-              <TableCell>0.845</TableCell>
-              <TableCell>0.916</TableCell>
-            </TableRow>
+            {tableValues.map((row, index) => (
+              <TableRow key={index}>
+                {row.map((cell, cellIndex) => (
+                  <TableCell key={cellIndex}>
+                    {cell}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
@@ -126,10 +93,10 @@ export default function FormStepSeven({
               id="demo-simple-select"
               value={sustainabilityScore || ""}
               label="Select Mix Design"
-              onChange={handleDesignLifeChange}
+              onChange={handleSelectMixDesign}
               placeholder="Select Mix Design"
             >
-              {mixBatchSelectionList.map((item) => (
+              {mixBatchTable.map((item) => (
                 <MenuItem key={item.key} value={item.key}>
                   {item.value}
                 </MenuItem>
