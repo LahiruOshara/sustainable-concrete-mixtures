@@ -14,21 +14,23 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import {
-  sustainabilityScoresList,
-  waterPermeabilityList,
-} from "../../constants/GeneralConstants";
+import { sustainabilityWeightList } from "../../constants/GeneralConstants";
 
 export default function FormStepSix({
-  strengthClass,
-  waterPermeability,
-  setWaterPermeability,
-  sustainabilityScore,
-  setSustainabilityScore
+  sustainabilityWeight,
+  setSustainabilityWeight,
 }) {
-  const handleDesignLifeChange = (event) => {
-    setSustainabilityScore(event.target.value);
+
+  const handleWeightingCombination = (event) => {
+    setSustainabilityWeight(event.target.value);
   };
+
+  // Define the values for the table cells in an array
+  const tableData = [
+    ["Env", "100%", "50%", "25%", "25%", "40%"],
+    ["Eco", "100%", "25%", "50%", "25%", "40%"],
+    ["Social", "100%", "25%", "25%", "50%", "20%"],
+  ];
 
   return (
     <React.Fragment>
@@ -56,48 +58,13 @@ export default function FormStepSix({
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell
-                component="th"
-                scope="row"
-                style={{ fontWeight: "bold" }}
-              >
-                Env
-              </TableCell>
-              <TableCell>100%</TableCell>
-              <TableCell>50%</TableCell>
-              <TableCell>25%</TableCell>
-              <TableCell>25%</TableCell>
-              <TableCell>40%</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell
-                component="th"
-                scope="row"
-                style={{ fontWeight: "bold" }}
-              >
-                Eco
-              </TableCell>
-              <TableCell>100%</TableCell>
-              <TableCell>50%</TableCell>
-              <TableCell>25%</TableCell>
-              <TableCell>25%</TableCell>
-              <TableCell>40%</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell
-                component="th"
-                scope="row"
-                style={{ fontWeight: "bold" }}
-              >
-                Social
-              </TableCell>
-              <TableCell>100%</TableCell>
-              <TableCell>50%</TableCell>
-              <TableCell>25%</TableCell>
-              <TableCell>25%</TableCell>
-              <TableCell>40%</TableCell>
-            </TableRow>
+            {tableData.map((row, index) => (
+              <TableRow key={index}>
+                {row.map((cellValue, cellIndex) => (
+                  <TableCell key={cellIndex}>{cellValue}</TableCell>
+                ))}
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
@@ -112,21 +79,18 @@ export default function FormStepSix({
         <Grid item xs={6}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">
-             Weighting Combination
+              Weighting Combination
             </InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={sustainabilityScore || ""}
+              value={sustainabilityWeight || ""}
               label="Weighting Combination"
-              onChange={handleDesignLifeChange}
+              onChange={handleWeightingCombination}
               placeholder="Weighting Combination"
             >
-              {sustainabilityScoresList.map((item) => (
-                <MenuItem
-                  key={item.key}
-                  value={item.key}
-                >
+              {sustainabilityWeightList.map((item) => (
+                <MenuItem key={item.key} value={item.key}>
                   {item.value}
                 </MenuItem>
               ))}

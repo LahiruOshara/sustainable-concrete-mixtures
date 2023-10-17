@@ -15,6 +15,11 @@ import FormStepFive from "./FormStepFive";
 import FormStepSix from "./FormStepSix";
 import FormStepSeven from "./FormStepSeven";
 import SummaryView from "./SummaryView";
+import { mixtureMap,
+   sustainabilityScoreList,
+    mixBatchSelectionList,
+     mixToTypeMap,
+     mixToMixTypeMap } from "../../constants/GeneralConstants";
 
 const steps = [
   "Structure Details",
@@ -22,7 +27,7 @@ const steps = [
   "Specifications",
   "Summary",
   "Durability Properties",
-  "Sustainability Scores",
+  "Sustainability Score Weights",
   "Sustainability Scores",
   "Concrete Mix Design",
 ];
@@ -47,6 +52,13 @@ export default function MixtureSelection({ setSubmitted }) {
   const [waterPermeability, setWaterPermeability] = React.useState();
 
   const [sustainabilityScore, setSustainabilityScore] = React.useState();
+  const [sustainabilityWeight, setSustainabilityWeight] = React.useState();
+  const [caseStudy, setCaseStudy] = React.useState();
+  const [tableValues, setTableValues] = React.useState();
+  const [mixBatchTable, setMixBatchTable] = React.useState();
+  const [cementType, setCementType] = React.useState();
+  const [mixtureType, setMixtureType] = React.useState();
+
 
   const isNextButtonDisabled = activeStep === 0 && area === "";
 
@@ -58,14 +70,51 @@ export default function MixtureSelection({ setSubmitted }) {
     setArea(area);
   };
 
+  const getCementType = () => {
+    const [mix, _] = sustainabilityScore.split(', ');
+    setCementType(mixToTypeMap.get(mix));
+  }
+
+  const getMixtyreType = () => {
+    const [mix, _] = sustainabilityScore.split(', ');
+    setMixtureType(mixToMixTypeMap.get(mix));
+  }
+
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
       // TODO submit data to the server
       console.log("Submitting data...");
       setSubmitted(true);
-    } else {
+    } else if (activeStep === steps.length - 2) {
+      getCementType();
       setActiveStep(activeStep + 1);
     }
+    else {
+      if (activeStep === 5) {
+        handleSustainabilityWeightChange();
+        setMixBatchTable(processMixBatchSelectionList());
+      }
+      setActiveStep(activeStep + 1);
+    }
+  };
+
+  const processMixBatchSelectionList = () => {
+    const mix = mixtureMap.get(strengthClass);
+    return mixBatchSelectionList.slice(mix[0]*3, mix[1]*3);
+  };
+
+  const handleCaseStudyChange = () => {
+    const value = area === "Colombo Area" ? (structureType === "Inland Structure" ? 2 : 1) : 0;
+    setCaseStudy(value);
+    return value;
+  };
+
+  const handleSustainabilityWeightChange = () => {
+    const caseStudyVal = handleCaseStudyChange();
+    const mix = mixtureMap.get(strengthClass);
+    const tableValues = sustainabilityScoreList[caseStudyVal][sustainabilityWeight].slice(mix[0], mix[1]);
+
+    setTableValues(tableValues);
   };
 
   const handleBack = () => {
@@ -139,8 +188,8 @@ export default function MixtureSelection({ setSubmitted }) {
             waterPermeability={waterPermeability}
             setWaterPermeability={setWaterPermeability}
             strengthClass={strengthClass}
-            sustainabilityScore={sustainabilityScore}
-            setSustainabilityScore={setSustainabilityScore}
+            sustainabilityWeight={sustainabilityWeight}
+            setSustainabilityWeight={setSustainabilityWeight}
           />
         );
       case 6:
@@ -153,6 +202,8 @@ export default function MixtureSelection({ setSubmitted }) {
             strengthClass={strengthClass}
             sustainabilityScore={sustainabilityScore}
             setSustainabilityScore={setSustainabilityScore}
+            tableValues={tableValues}
+            mixBatchTable={mixBatchTable}
           />
         );
       case 7:
@@ -160,11 +211,9 @@ export default function MixtureSelection({ setSubmitted }) {
           <SummaryView
             selectedStructureType={structureType}
             selectedArea={area}
-            selectedCarbonationClass={carbonationClass}
-            selectedCorrosion={corrosion}
-            selectedChemicalAttack={chemicalAttack}
-            selectedDesignLife={designLife}
-            selectedStrengthClass={strengthClass}
+            cementType={cementType}
+            // mixtureProportions={mixtureProportions}
+            mixtureType={mixtureType}
           />
         );
       default:
