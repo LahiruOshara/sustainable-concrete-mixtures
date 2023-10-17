@@ -9,7 +9,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-
 export default function SummaryView({
   selectedStructureType,
   selectedArea,
@@ -17,17 +16,29 @@ export default function SummaryView({
   mixtureType,
 }) {
 
+  const data = [
+    { property: "Cement", value: 400 },
+    { property: "Water", value: 165 },
+    { property: "Msand", value: 827 },
+    { property: "Coarse Agg", value: 1070 },
+    { property: "Sika 2055 (ml)", value: 3.6 },
+    { property: "Density", value: 2462 },
+    { property: "w/c", value: 0.41 },
+    { property: "Admix.Dosage %", value: 0.9 },
+  ];
 
-const data = [
-  { property: "Cement", value: 400 },
-  { property: "Water", value: 165 },
-  { property: "Msand", value: 827 },
-  { property: "Coarse Agg", value: 1070 },
-  { property: "Sika 2055 (ml)", value: 3.6 },
-  { property: "Density", value: 2462 },
-  { property: "w/c", value: 0.41 },
-  { property: "Admix.Dosage %", value: 0.9 },
-];
+  const data1 = [
+    { property: "Cement", value: 350 },
+    { property: "Water", value: 205 },
+    { property: "River sand", value: 690 },
+    { property: "Coarse Agg", value: 1152 },
+    { property: "Sika 2055 (ml)", value: 0 },
+    { property: "Density", value: 2397 },
+    { property: "w/c", value: 0.59 },
+    { property: "Admix.Dosage %", value: 0 },
+  ];
+
+  const finalData = mixtureType === "Mix 1" ? data : data1;
 
   return (
     <React.Fragment>
@@ -77,27 +88,27 @@ const data = [
       </Typography>
 
       <TableContainer component={Paper}>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Property</TableCell>
-            <TableCell align="right">Value</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row, index) => (
-            <TableRow key={index}>
-              <TableCell component="th" scope="row">
-                {row.property}
-              </TableCell>
-              <TableCell align="right">{row.value}</TableCell>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Property</TableCell>
+              <TableCell align="right">Value</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {finalData.map((row, index) => (
+              <TableRow key={index}>
+                <TableCell component="th" scope="row">
+                  {row.property}
+                </TableCell>
+                <TableCell align="right">{row.value}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-      {1 === 1 ? (
+      {mixtureType === "Mix 1" ? (
         <div>
           <Typography variant="h7" gutterBottom style={{ fontWeight: "bold" }}>
             <br />
@@ -123,11 +134,11 @@ const data = [
         </div>
       )}
 
-      {1 === 1 ? (
+      {mixtureType === "Mix 1" ? (
         <div>
           <Typography variant="h7" gutterBottom style={{ fontWeight: "bold" }}>
             <br />
-              Properties of fine aggregates:
+            Properties of fine aggregates:
             <br />
           </Typography>
           <Typography variant="body1">
@@ -139,7 +150,7 @@ const data = [
         <div>
           <Typography variant="h7" gutterBottom style={{ fontWeight: "bold" }}>
             <br />
-              Properties of fine aggregates:
+            Properties of fine aggregates:
             <br />
           </Typography>
           <Typography variant="body1">
